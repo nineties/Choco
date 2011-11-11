@@ -1,0 +1,21 @@
+function lib_create_array (num value)
+  (let_const header (alloc num)
+    (for i in 0..num
+      store (adds header i) value
+    )
+    header);
+
+function lib_create_big_array (size num e)
+  (let_const header (alloc 0)
+    for i in 0..num
+      (let_const ptr (alloc size)
+      for j in 0..size
+        (
+        store (add ptr j) (load (add e j))
+        )
+      )
+    header
+  );
+
+
+

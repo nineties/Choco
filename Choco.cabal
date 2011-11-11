@@ -1,0 +1,12 @@
+Name:           Choco
+Version:        0.1
+License:        GPL
+Author:         Nakamura Koichi
+Category:       Testing
+Build-Depends:  base,mtl,parsec,HUnit,array,containers,pretty,old-time, process
+Synopsis:       The MinCaml compiler written in Haskell
+
+Executable:     choco
+Main-Is:        Main.hs
+Hs-Source-Dirs: src tsubaki
+Other-Modules:  Lexer Parser

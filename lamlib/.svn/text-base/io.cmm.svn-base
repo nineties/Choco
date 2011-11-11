@@ -1,0 +1,12 @@
+function lib_read ()
+  (call lib_read_sub 4 0);
+
+function lib_read_sub (index value)
+  (if (index == 0) value
+  (call lib_read_sub (subi index 1) (adds (slliu value 8) (call get_func))));
+
+function get_func ()
+  (let_const a (get)
+    if (a < 0) (call get_func) a);
+
+

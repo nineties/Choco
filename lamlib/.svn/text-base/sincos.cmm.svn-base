@@ -1,0 +1,46 @@
+function k_sin (x)
+  (let_const y (fmul x x)
+   (fmul x (fadd 1.0 (fmul y (fadd 0xbe2aaaab (fmul y (fadd 0x3c088889 (fmul y (fadd 0xb9500d01 (fmul y (fadd 0x3638ef1b (fmul y (fadd 0xb2d72f34 (fmul y 0x2f2ec9d3))))))))))))));
+
+function k_cos (x)
+  (let_const y (fmul x x)
+   (fadd 1.0 (fmul y (fadd 0xbf000000 (fmul y (fadd 0x3d2aaaab (fmul y (fadd 0xbab60b61 (fmul y (fadd 0x37d00d01 (fmul y (fadd 0xb493f27c (fmul y (fadd 0x310f74f6 (fmul y 0xad47d74e)))))))))))))));
+
+function reduction (x)
+  (
+  let_const hpi 0x3fc90fdb
+  let_const qpi 0x3f490fdb
+  let t (fabs x)
+  let r 0
+  (while (t >. qpi) (
+    (assign t (fsub t hpi))
+    (assign r (if (r < 3) (addiu r 1) 0))
+    ))
+  (t, r)
+  );
+
+
+function lib_cos (a)
+  (
+  let_const (t, r) (call reduction a)
+  if (r == 0)
+    (call k_cos t)
+  (if (r == 1)
+    (fneg (call k_sin t))
+  (if (r == 2)
+    (fneg (call k_cos t))
+  (call k_sin t)))
+  );
+
+function lib_sin (a)
+  (
+  let_const (t, r) (call reduction a)
+  if (r == 0)
+    (call k_sin t)
+  (if (r == 1)
+    (call k_cos t)
+  (if (r == 2)
+    (fneg (call k_sin t))
+  (fneg (call k_cos t))))
+  );
+

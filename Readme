@@ -1,0 +1,11 @@
+Dependencies : GHC, Alex, Happy, HUnit
+
+#=== build ===#
+$ runhaskell Setup configure
+$ runhaskell Setup build
+
+#=== run tests ===#
+$ runhaskell Setup test
+
+#=== clean ===#
+$ runhaskell Setup clean
