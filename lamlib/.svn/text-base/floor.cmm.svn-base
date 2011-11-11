@@ -1,5 +1,0 @@
-function lib_floor (f)
-  (let_const a (call lib_float_int (call lib_int_of_float f))
-   if (f <. 0.0)
-   (if (f ==. a) a (fsub a 1.0)) a
-  );
